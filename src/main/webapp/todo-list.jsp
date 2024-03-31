@@ -28,7 +28,6 @@
             <td>${todoitem.description}</td>
             <td>${todoitem.status ? 'Completed' : 'Pending'}</td>
             <td>
-                <a href="edit?id=${todoitem.id}">Update</a> |
                 <a href="delete?id=${todoitem.id}">Delete</a>
             </td>
         </tr>
