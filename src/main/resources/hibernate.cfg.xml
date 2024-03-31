@@ -8,7 +8,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/datatodo</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">4801675271aA!</property>
+        <property name="hibernate.connection.password">root</property>
 
         <!-- JDBC connection pool settings -->
         <property name="hibernate.connection.pool_size">5</property>

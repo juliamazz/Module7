@@ -40,12 +40,6 @@ public class TodoItemServlet extends HttpServlet{
                 case "/delete":
                     deleteItem(request, response);
                     break;
-                case "/edit":
-                    showEditForm(request, response);
-                    break;
-                case "/update":
-                    updateItem(request, response);
-                    break;
                 default:
                     listItems(request, response);
                     break;
@@ -68,16 +62,7 @@ public class TodoItemServlet extends HttpServlet{
         RequestDispatcher dispatcher = request.getRequestDispatcher("todo-add-item-form.jsp");
         dispatcher.forward(request, response);
     }
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        TodoItem existingItem = TodoItemDAO.getItem(id);
-        System.out.println("1" + existingItem.getDescription());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("todo-update-item-form.jsp");
-        request.setAttribute("todoitem", existingItem);
-        dispatcher.forward(request, response);
 
-    }
     private void insertItem(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String description = request.getParameter("description");
@@ -86,15 +71,7 @@ public class TodoItemServlet extends HttpServlet{
         todoItemDao.addItem(newItem);
         response.sendRedirect("list");
     }
-    private void updateItem(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String description = request.getParameter("description");
-        Boolean status = Boolean.valueOf(request.getParameter("status"));
-        TodoItem item = new TodoItem(id, description, status);
-        todoItemDao.updateItem(item);
-        response.sendRedirect("list");
-    }
+
     private void deleteItem(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));

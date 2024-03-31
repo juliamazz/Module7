@@ -16,52 +16,25 @@ public class TodoItemDAO {
      */
     public void addItem(TodoItem item) {
         Transaction transaction = null;
+        int max_id = -1;
         try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
             // start a transaction
             transaction = session.beginTransaction();
 
-            if (!transaction.isActive()){
-                transaction.begin();
-            }
+            item.setId(max_id);
             // save the object
             session.save(item);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
             e.printStackTrace();
         }
     }
 
-    /**
-     * Update Item
-     * @param item
-     */
-    public void updateItem(TodoItem item)
-    {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().getCurrentSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
 
-            if (!transaction.isActive()){
-                transaction.begin();
-            }
-            System.out.println("3" + item.getDescription());
-            // save the object
-            session.update(item);
-            System.out.println("4" + item.getDescription());
-            // commit transaction
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
     /**
      * Delete Item
      * @param id

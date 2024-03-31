@@ -10,7 +10,8 @@ public class TodoItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Assuming you want auto-generated IDs
-    private int id; // Add an ID field for Hibernate to use
+    @Column(name="id",updatable = false, nullable = false)
+    private int id=-1; // Add an ID field for Hibernate to use
 
     @Column(name = "description")
     private String description;
