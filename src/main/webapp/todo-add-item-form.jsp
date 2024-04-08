@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Julianne
-  Date: 3/27/2024
-  Time: 11:43 AM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -24,8 +18,6 @@
     <label for="description">Description:</label><br>
     <input type="text" id="description" name="description" value = "${todoitem != null ? todoitem.description : ''}" required><br>
 
-    <label for="status">Status:</label><br>
-    <input type="checkbox" id="status" name="status" ${todoitem != null && todoitem.status ? "checked" : ""}><br>
 
     <button type="submit">Submit</button>
 </form>

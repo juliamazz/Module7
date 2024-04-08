@@ -67,7 +67,7 @@ public class TodoItemServlet extends HttpServlet{
             throws SQLException, IOException {
         String description = request.getParameter("description");
         Boolean status = Boolean.valueOf(request.getParameter("status"));
-        TodoItem newItem = new TodoItem(description, status);
+        TodoItem newItem = new TodoItem(description);
         todoItemDao.addItem(newItem);
         response.sendRedirect("list");
     }

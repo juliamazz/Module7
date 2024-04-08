@@ -16,28 +16,22 @@ public class TodoItem {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "status")
-    private boolean status;
 
-    public TodoItem(int i, String d, boolean b) {
-        this.id = i;
-        this.description = d;
-        this.status = b;
-    }
 
     public TodoItem(int i, String d) {
         this.id = i;
         this.description = d;
-        this.status = false;
+
     }
-    public TodoItem(String d, boolean b) {
+
+
+    public TodoItem(String d) {
         this.description = d;
-        this.status = b;
     }
 
     public TodoItem() {
         this.description = "Default";
-        this.status = false;
+
     }
 
     public int getId() {
@@ -56,12 +50,5 @@ public class TodoItem {
         this.description = description;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
 }
 

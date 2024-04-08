@@ -8,8 +8,26 @@ import org.hibernate.type.LongType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TodoItemDAO {
+
+    public static List<String> extractQueries(String input) {
+        List<String> queries = new ArrayList<>();
+
+        // Regular expression pattern to match SQL statements separated by semicolons
+        Pattern pattern = Pattern.compile("(?i)\\b(INSERT\\s+INTO|DELETE\\s+FROM|UPDATE|SELECT)\\b.*?;");
+        Matcher matcher = pattern.matcher(input);
+
+        // Iterate through matches and add them to the list
+        while (matcher.find()) {
+            queries.add(matcher.group().trim());
+        }
+
+        return queries;
+    }
+
     /**
      * Add Item
      * @param item
@@ -22,8 +40,31 @@ public class TodoItemDAO {
             transaction = session.beginTransaction();
 
             item.setId(max_id);
+
+            System.out.println(max_id);
+            System.out.println(item.getDescription());
+
+
+            String description = item.getDescription();
+
             // save the object
-            session.save(item);
+            //session.save(item);
+            String hql = String.format("INSERT INTO TodoItem (description) VALUES ('%s')",
+                    description);
+
+            List<String> queries = extractQueries(hql);
+
+            String tmp_query = null;
+
+            for (String query : queries) {
+
+                System.out.println(query);
+                int rowsAffected = session.createNativeQuery(query).executeUpdate();
+            }
+
+
+
+
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
